@@ -1,4 +1,5 @@
 import os
 import re
 
-os.remove("./data/video/raw-mp4/QuadCam.mp4")
+image_files = [os.path.join("./data/video/frames/", f) for f in os.listdir("./data/video/frames/")]
+print(image_files[0])
