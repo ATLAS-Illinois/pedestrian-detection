@@ -10,6 +10,11 @@ Computer Vision Project using YOLOv8 to detect and count the number of people in
 4) Then open your **bash** terminal in the folder you cloned your repo in and run the following set of commands one by one
 ```
 mamba env create -f environment.yml # creates the environment according to the yml file
+mamba init
+```
+Close your terminal and reopen it.
+
+```
 mamba activate pedestrian-detection # activates environment so that the packages are usable in the code
 ```
 5) In `backend/` run `extract_images.py` to download the video and extract the images into `data/video/frames/`.
@@ -23,6 +28,10 @@ mamba activate pedestrian-detection # activates environment so that the packages
 3) Then open a **bash** terminal (Mac may sometimes open zsh which we DONT want) in the folder you cloned your repo in and run the following set of commands one by one
 ```
 mamba env create -f environment.yml # creates the environment according to the yml file
+mamba init
+```
+Close your terminal and reopen it.
+```
 mamba activate pedestrian-detection # activates environment so that the packages are usable in the code
 ```
 4-6) Same steps as [Windows](#windows-wsl2)
