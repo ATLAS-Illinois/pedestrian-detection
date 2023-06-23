@@ -1,0 +1,13 @@
+name: pedestrian-detection
+channels:
+  - conda-forge
+  - defaults
+  - http://ssb.stsci.edu/astroconda
+dependencies:
+  - yt-dlp
+  - ffmpeg
+  - ultralytics
+  - ca-certificates
+  - certifi
+  - openssl
+prefix: /home/yash/miniconda3/envs/pedestrian-detection
