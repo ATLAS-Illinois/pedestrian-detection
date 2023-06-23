@@ -17,7 +17,7 @@ Close your terminal and reopen it.
 ```
 mamba activate pedestrian-detection # activates environment so that the packages are usable in the code
 ```
-5) In `backend/` run `extract_images.py` to download the video and extract the images into `data/video/frames/`.
+5) In `backend/` run `extract_images.py` to download the video and extract the images into `data/video/frames/`. You'll need to change some filepaths. Refer to [Configuration](#configuration)
 
    For development environment, don't set the `duration` more than 120 seconds. 
 6) Split your terminal (In VSCode) or open a new terminal and run `run_inference.py` to output the number of detections that standard `yolov8n.pt` runs. In the future, we will have our own model trained on a custom dataset.
@@ -35,3 +35,11 @@ Close your terminal and reopen it.
 mamba activate pedestrian-detection # activates environment so that the packages are usable in the code
 ```
 4-6) Same steps as [Windows](#windows-wsl2)
+
+## Configuration
+You can use `whereis ffmpeg` and `whereis yt-dlp` to get your specific filepaths. Then, replace all the `/home/yash/miniconda` filepaths in `extract_images.py` with your specific fielpaths of ffmpeg and yt-dlp.
+
+If you want to download the video file for more than 10 seconds, set the duration variable number to a different value.
+
+Additionally, if you only want to extract images every 5/10/15 seconds instead, change the `fps=1` argument in `extract_images.py` to `fps=5`,`fps=10`,etc
+
