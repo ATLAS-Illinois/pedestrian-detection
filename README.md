@@ -14,7 +14,7 @@ mamba activate pedestrian-detection # activates environment so that the packages
 ```
 5) In `backend/` run `extract_images.py` to download the video and extract the images into `data/video/frames/`.
 
-   For development environment, don't let the `duration > 120`. 
+   For development environment, don't set the `duration` more than 120 seconds. 
 6) Split your terminal (In VSCode) or open a new terminal and run `run_inference.py` to output the number of detections that standard `yolov8n.pt` runs. In the future, we will have our own model trained on a custom dataset.
 
 ### Mac
