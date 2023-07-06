@@ -30,7 +30,7 @@ def extract_frames_from_video(video_path, output_dir):
         start_number = int(max(files, key=extract_number)[20:-4]) + 1
     # Adding the .png file-extension
     output_dir += "%04d.png"
-    subprocess.run(['/home/yash/miniconda3/envs/pedestrian-detection/bin/ffmpeg', '-i', video_path, '-start_number', str(start_number),'-vf','fps=1',output_dir])
+    subprocess.run(['/home/yash/miniconda3/envs/pedestrian-detection/bin/ffmpeg', '-i', video_path, '-start_number', str(start_number),'-vf','fps=1/60',output_dir])
 
 def delete_video(video_path):
     # Delete the downloaded video file
