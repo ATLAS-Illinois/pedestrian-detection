@@ -1,0 +1,29 @@
+body {
+    background: #f1f5f8;
+}
+
+.header {
+    background: linear-gradient(to right, #61a1cc, #87ceeb);
+    padding: 20px;
+    color: #fff;
+}
+
+.main-heading {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 36px;
+}
+
+.sub-heading {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+}
+
+.histogram {
+    margin-top: 50px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}

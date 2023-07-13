@@ -5,45 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Quad Cam Pedestrian Detection</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <style>
-            /* Custom CSS */
-            body {
-            background: #f1f5f8;
-            }
-
-            .header {
-            background: linear-gradient(to right, #61a1cc, #87ceeb);
-            padding: 20px;
-            color: #fff;
-            }
-
-            .main-heading {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 36px;
-            }
-
-            .sub-heading {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 18px;
-            color: #555;
-            }
-
-            .histogram {
-            margin-top: 50px;
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-            }
-        </style>
+        <link rel="stylesheet" href="../static/css/style.css">
     </head>
     <body>
     <div class="header">
         <h1>Quad Cam Pedestrian Detection</h1>
     </div>
-
-    <div class="container">
+    <div class="container-fluid">
         <div class="main-heading">
         <h2>Quad Cam Pedestrian Detection</h2>
         </div>
@@ -57,49 +25,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Generate fake data for the histogram
-        function generateFakeData() {
-        var data = [];
-        for (var i = 0; i < 24; i++) {
-            var value = Math.floor(Math.random() * 1000);
-            data.push(value);
-        }
-        return data;
-        }
-
-        // Create the histogram chart
-        var ctx = document.getElementById('histogramChart').getContext('2d');
-        var histogramChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: Array.from({ length: 24 }, (_, i) => i),
-            datasets: [{
-            label: 'Number of People',
-            data: generateFakeData(),
-            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                display: true,
-                text: 'Number of People'
-                }
-            },
-            x: {
-                title: {
-                display: true,
-                text: 'Time of Day (hours)'
-                }
-            }
-            }
-        }
-        });
-    </script>
+    <script src="main.js"></script>
     </body>
 </html>

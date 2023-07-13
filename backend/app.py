@@ -1,7 +1,8 @@
 from run_inference import predict_people
 from flask import Flask, render_template, redirect
 
-num_people = predict_people()
+# num_people = predict_people()
+num_people = 2
 
 app = Flask(__name__)
 

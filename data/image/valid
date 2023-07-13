@@ -1,7 +1,0 @@
-The validation set is a set of data, separate from the training set, that is used to validate our model performance during training.
-
-This validation process gives information that helps us tune the model’s hyperparameters and configurations accordingly. It is like a critic telling us whether the training is moving in the right direction or not.
-
-The model is trained on the training set, and, simultaneously, the model evaluation is performed on the validation set after every epoch.
-
-The main idea of splitting the dataset into a validation set is to prevent our model from overfitting i.e., the model becomes really good at classifying the samples in the training set but cannot generalize and make accurate classifications on the data it has not seen before. 
