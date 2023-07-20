@@ -43,3 +43,8 @@ If you want to download the video file for more than 10 seconds, set the duratio
 
 Additionally, if you only want to extract images every 5/10/15 seconds instead, change the `fps=1` argument in `extract_images.py` to `fps=5`,`fps=10`,etc
 
+## Running Project
+
+First, `git clone https://github.com/yaswant2403/pedestrian-detection.git`
+
+Currently, you will have to run two different files. The first file is `extract_images.py` which will download the livestream of the Quad Cam to `video/raw-mp4` for x seconds and then extract the frames into `video/frames`. The second file is `run.py` which will launch the website and run inference on the images in the `frames/` folder displaying that in the heading.
