@@ -33,7 +33,8 @@ def extract_frames_from_video(video_path, output_dir):
         start_number = int(max(files, key=extract_number)[15:-4]) + 1
     # Adding the .png file-extension
     output_dir += "%04d.png"
-    subprocess.run(['/home/yash/miniconda3/envs/pedestrian-detection/bin/ffmpeg', '-i', video_path, '-start_number', str(start_number),'-vf','fps=1/2',output_dir])
+    # grabbing a frame every 10 seconds (approx 6 frames)
+    subprocess.run(['/home/yash/miniconda3/envs/pedestrian-detection/bin/ffmpeg', '-i', video_path, '-start_number', str(start_number),'-vf','fps=1/10',output_dir])
 
 def delete_video(video_path):
     # Delete the downloaded video file
@@ -42,9 +43,9 @@ def delete_video(video_path):
 
 # Example usage
 youtube_url = 'https://www.youtube.com/watch?v=DbH7LGdUxJI'  # Replace with the actual YouTube livestream URL
-duration = 20  # 10 seconds
+duration = 60  # 60 seconds
 
-# Now, we are downloading the livestream for 20 seconds, stopping, extracting the frames as images, deleting the original video, and then restrating the whole process again 
+# Now, we are downloading the livestream for 60 seconds, stopping, extracting the frames as images, deleting the original video, and then restrating the whole process again 
 while True:
     download_livestream(youtube_url, duration)
     extract_frames_from_video('./video/raw-mp4/QuadCam.mp4', './video/frames/')

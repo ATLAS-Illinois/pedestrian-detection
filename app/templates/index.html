@@ -35,13 +35,15 @@
         <script src="https://code.jquery.com/jquery-3.7.0.slim.js" 
         integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" 
         crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js" 
+        integrity="sha256-Nn+JGDrq3PuTxcDfJmmI0Srj5LpfOFlKqEiPwQK7y40=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js" 
         integrity="sha512-Z6C1p1NIexPj5MsVUunW4pg7uMX6/TT3CUVldmjXx2kpip1eZcrAnxIusDxyFIikyM9A61zOVNgvLr/TGudOQg==" 
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
         <div class="container-fluid">
-            <h4>In the past 10 minutes, there are X people on the Quad.</h4>
+            <h4 class="sub-heading">In the past minute, there are {{num_people}} people on the Quad.</h4>
         </div>
         <div class="container-fluid histogram">
             <canvas id="histogramChart"></canvas>

@@ -7,7 +7,7 @@ function generateFakeData() {
     }
     return data;
 }
-
+var DateTime = luxon.DateTime;
 // instantiating socket object
 var socket= io.connect('http://127.0.0.1:5000/');
 var people = 0;
@@ -19,16 +19,20 @@ $(document).ready(function() {
         console.log('After connect', msg.data);
     })
     function getUpdate() {
-        console.log("It's been 20 seconds, we need an update!")
+        console.log("It's been 60 seconds, we need an update!")
         socket.emit('Update histogram', {
-            bool: true
+            update: true
         });
     }
-    setInterval(getUpdate, 10000);
+    // update the histogram data every 60000 ms = 1 minute 
+    setInterval(getUpdate, 60000);
     socket.on('update count of people', function(num_people) {
         console.log('Updated the histogram!');
         // console.log(num_people.count);
         people = num_people.count;
+        $('.sub-heading').text(`In the past minute, there are ${people} people on the Quad.`)
+        // if timestamp is less than the last label, we are good to update normally,
+        // else if equal to or greater than, we clear current labels and current data and then update.
         updateHistogramChart(people);
     })
 })
@@ -36,27 +40,44 @@ $(document).ready(function() {
 
 async function updateHistogramChart(num_people) {
     // const num_people = await getPrediction();
-    const now = new Date();
-    const minute = now.getMinutes();
-    histogramChart.data.labels.shift();
-    histogramChart.data.labels.push(minute);
+    // const now = new Date();
+    // const minute = now.getMinutes();
+    // histogramChart.data.labels.shift();
+    // histogramChart.data.labels.push(minute);
     // histogramChart.data.datasets[0].data.shift();
     histogramChart.data.datasets[0].data.push(num_people);
     histogramChart.update();
 }
 
+function generateLabels() {
+    const labels = [];
+    const currentTime = new Date();
 
+    // histograms last x-label is 1 hour from current time
+    var nextHour = DateTime.now().plus({hours: 1}).toJSDate();
 
+    // Start with the current time
+    let currentTimeLabel = currentTime.getTime();
+    // Time interval in milliseconds (1 minute)
+    const interval = 1000 * 60;
+
+    // Generate labels for each minute until the next hour
+    while (currentTimeLabel < nextHour.getTime()) {
+        labels.push(new Date(currentTimeLabel).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+        currentTimeLabel += interval;
+    }
+    return labels;
+}
 
 // Create the histogram chart
 var ctx = document.getElementById('histogramChart').getContext('2d');
 var histogramChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: Array.from({ length: 5 }, (_, i) => i + 1),
+        labels: generateLabels(),
         datasets: [{
             label: 'Number of People',
-            data: [2, 4],
+            data: [0],
             backgroundColor: 'rgba(54, 162, 235, 0.5)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
