@@ -4,7 +4,7 @@ import os
 model = YOLO("yolov8sp2.pt")
 
 def predict_people():
-    image_files = [os.path.join("video/frames", f) for f in os.listdir("video/frames")]
+    image_files = [os.path.join("video/frames-test", f) for f in os.listdir("video/frames-test")]
     # counter for number of people
     num_people = 0
 
