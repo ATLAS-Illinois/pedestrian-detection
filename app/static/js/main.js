@@ -11,24 +11,34 @@ var DateTime = luxon.DateTime;
 // instantiating socket object
 var socket= io.connect('http://127.0.0.1:5000/');
 var people = 0;
+let updateCount = 0;
 
 $(document).ready(function() {
     socket.on('after connect', function(msg) {
         console.log('After connect', msg.data);
     })
-    function getUpdate() {
-        console.log("It's been 60 seconds, we need an update!")
-        socket.emit('Update histogram', {
-            update: true
-        });
+    function runInference() {
+        // update the histogram data every 60000 ms = 1 minute 
+        if (updateCount == 2) { // inference has been run on two blocks of 30 seconds so we have data for a minute we can get
+            updateCount == 0;
+            console.log("It's been 60 seconds, getPeopleCount!")
+            socket.emit('Update histogram', {
+                update: true
+            });
+        } else {
+            updateCount++;
+            console.log(updateCount);
+            console.log("It's been 30 seconds, run inference!")
+            socket.emit('Run inference', {
+                predict: true
+            });
+        }
     }
-    // update the histogram data every 60000 ms = 1 minute 
-    // setInterval(getUpdate, 60000);
-    setInterval(getUpdate, 10000);
-    socket.on('update count of people', function(num_people_and_time) {
+    setInterval(runInference, 30000);
+    socket.on('update count of people', function(data) {
         console.log('Updated the histogram!');
-        console.log(num_people_and_time);
-        people = num_people_and_time.count;
+        console.log(data);
+        people = data.num_people;
         $('.sub-heading').text(`In the past minute, there are ${people} people on the Quad.`)
         // if timestamp is less than the last label, we are good to update normally,
         // else if equal to or greater than, we clear current labels and current data and then update.
