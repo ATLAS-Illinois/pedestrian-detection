@@ -1,12 +1,3 @@
-// Generate fake data for the histogram
-function generateFakeData() {
-    var data = [];
-    for (var i = 0; i < 24; i++) {
-        var value = Math.floor(Math.random() * 1000);
-        data.push(value);
-    }
-    return data;
-}
 var DateTime = luxon.DateTime;
 // instantiating socket object
 var socket= io.connect('http://127.0.0.1:5000/');
@@ -18,16 +9,18 @@ $(document).ready(function() {
         console.log('After connect', msg.data);
     })
     function runInference() {
-        // update the histogram data every 60000 ms = 1 minute 
-        if (updateCount == 2) { // inference has been run on two blocks of 30 seconds so we have data for a minute we can get
-            updateCount == 0;
+        // update the histogram data every 60000 ms = 1 minute
+        console.log("The updateCount is: ", updateCount);
+        if (updateCount == 2) { // inference has been run on two blocks of 30 seconds so we nee to get data for a minute
+            console.log("In getPeopleCountThe updateCount is: ", updateCount);
+            updateCount = 0;
             console.log("It's been 60 seconds, getPeopleCount!")
             socket.emit('Update histogram', {
                 update: true
             });
         } else {
             updateCount++;
-            console.log(updateCount);
+            console.log("In the run inference emit: ", updateCount);
             console.log("It's been 30 seconds, run inference!")
             socket.emit('Run inference', {
                 predict: true
@@ -54,6 +47,7 @@ async function updateHistogramChart(num_people) {
     // histogramChart.data.labels.shift();
     // histogramChart.data.labels.push(minute);
     // histogramChart.data.datasets[0].data.shift();
+    console.log(histogramChart.data.datasets[0].data.length)
     histogramChart.data.datasets[0].data.push(num_people);
     histogramChart.update();
 }
