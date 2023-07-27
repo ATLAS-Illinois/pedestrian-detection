@@ -12,8 +12,6 @@ var DateTime = luxon.DateTime;
 var socket= io.connect('http://127.0.0.1:5000/');
 var people = 0;
 
-var test = 10;
-
 $(document).ready(function() {
     socket.on('after connect', function(msg) {
         console.log('After connect', msg.data);
@@ -25,11 +23,12 @@ $(document).ready(function() {
         });
     }
     // update the histogram data every 60000 ms = 1 minute 
-    setInterval(getUpdate, 60000);
-    socket.on('update count of people', function(num_people) {
+    // setInterval(getUpdate, 60000);
+    setInterval(getUpdate, 10000);
+    socket.on('update count of people', function(num_people_and_time) {
         console.log('Updated the histogram!');
-        // console.log(num_people.count);
-        people = num_people.count;
+        console.log(num_people_and_time);
+        people = num_people_and_time.count;
         $('.sub-heading').text(`In the past minute, there are ${people} people on the Quad.`)
         // if timestamp is less than the last label, we are good to update normally,
         // else if equal to or greater than, we clear current labels and current data and then update.
@@ -54,7 +53,8 @@ function generateLabels() {
     const currentTime = new Date();
 
     // histograms last x-label is 1 hour from current time
-    var nextHour = DateTime.now().plus({hours: 1}).toJSDate();
+    // var nextHour = DateTime.now().plus({hours: 1}).toJSDate();
+    var next5Mins = DateTime.now().plus({minutes: 5}).toJSDate();
 
     // Start with the current time
     let currentTimeLabel = currentTime.getTime();
@@ -62,7 +62,7 @@ function generateLabels() {
     const interval = 1000 * 60;
 
     // Generate labels for each minute until the next hour
-    while (currentTimeLabel < nextHour.getTime()) {
+    while (currentTimeLabel < next5Mins.getTime()) {
         labels.push(new Date(currentTimeLabel).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
         currentTimeLabel += interval;
     }
