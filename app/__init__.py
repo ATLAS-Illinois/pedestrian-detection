@@ -24,7 +24,7 @@ def test_connect():
 def update_num_people(data):
     print(data)
     num_people_and_time = predict_people()
-    csv_file = open('/home/yash/quadcam/pedestrian-detection/app/people_time_data.csv', 'a')
+    csv_file = open('people_time_data.csv', 'a')
     csv_file.write(f'{num_people_and_time["count"]}, {num_people_and_time["timestamp"]}\n')
     csv_file.close()
     emit('update count of people', num_people_and_time, broadcast=True)
